@@ -1,0 +1,17 @@
+Theme: Nothing can go wrong
+Game link: ???
+
+The plan:
+
+-------------
+Priority list
+
+Necessary : These are absolutely necessary for the game to work.
+
+
+High : These features will be prioritized during developpement. Ideally, all of them get finished.
+
+
+Medium : These features will be added if there is spare time at the end of the jam. Some of them may be added.
+
+Low : These features will not be added in the game jam.
