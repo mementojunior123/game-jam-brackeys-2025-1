@@ -1,24 +1,29 @@
 Theme: Nothing can go wrong
-Game link: ???
+Game link: https://mementojunior123.itch.io/game-jam-13
 
 The plan:
 A mouse(or kbm) based bullet hell game where everything kicks off beacause you did something you shouldn't have.
 (Like pressing a big red button)
 Every "stage" is you doing something you shouldn't have.
+Example: You turn on a broken lawnmower and it starts charging and sending grass at you. New objective: Survive.
 After all, what could possibly go wrong?
 -------------
 Priority list
 
 Necessary : These are absolutely necessary for the game to work.
 -The bullet hell part
--Figure out how controlling your caracter and how dodging works
+-Figure out how controlling your caracter and how dodging works 
+ (Is there a dodge ability? Do we use a mouse or a keyboard?)
 -Figure out what exactly causes the stages to start
 
 High : These features will be prioritized during developpement. Ideally, all of them get finished.
 -Figure out the theming of each stage
+-Add a bit of music and sfx so the game dosent feel empty
+-Add *some* assets to the game
 
 Medium : These features will be added if there is spare time at the end of the jam. Some of them may be added.
--Searching for proper assets
+-Get proper assets
+-Get more diverse sound and music
 
 Low : These features will not be added in the game jam.
 -Implement settings
