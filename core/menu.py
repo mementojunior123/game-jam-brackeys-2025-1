@@ -273,10 +273,7 @@ class Menu(BaseMenu):
         self.stages = [None, 
         [BaseUiElements.new_text_sprite('Dont do it!', (Menu.font_60, 'Black', False), 0, 'midtop', (centerx, 50)),
         BaseUiElements.new_button('BlueButton', 'Play', 1, 'midbottom', (centerx, window_size[1] - 15), (0.5, 1.4), 
-        {'name' : 'play_button'}, (Menu.font_40, 'Black', False)),
-        BaseUiElements.new_button('BlueButton', 'Test', 1, 'bottomright', (wx - 15, window_size[1] - 15), (0.5, 1.4), 
-        {'name' : 'test_button'}, (Menu.font_40, 'Black', False))], #stage 1
-
+        {'name' : 'play_button'}, (Menu.font_40, 'Black', False))], #stage 1
         []
         ]
         self.bg_color = (94, 129, 162)
@@ -299,6 +296,4 @@ class Menu(BaseMenu):
         match self.stage:
             case 1:
                 if name == "play_button":
-                    pygame.event.post(pygame.Event(core_object.START_GAME, {'mode' : 'test'}))
-                if name == 'test_button':
-                    self.goto_stage(2)
+                    pygame.event.post(pygame.Event(core_object.START_GAME, {'mode' : 'story'}))

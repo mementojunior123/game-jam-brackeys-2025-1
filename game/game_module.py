@@ -40,6 +40,8 @@ class Game:
         self.make_connections()
         if event.mode == 'test':
             self.state = self.STATES.TestGameState(self)
+        elif event.mode == 'story':
+            self.state = self.STATES.RedButtonStage(self)
         else:
             self.state = self.STATES.TestGameState(self)
 

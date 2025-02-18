@@ -71,6 +71,21 @@ class TestGameState(NormalGameState):
     def cleanup(self):
         game.test_player.remove_connections()
 
+class RedButtonStage(NormalGameState):
+    def __init__(self, game_object : 'Game'):
+        super().__init__(game_object)
+        self.player : Player = Player.spawn(pygame.Vector2(480, 270))
+        self.red_button : RedButton = RedButton.spawn(pygame.Vector2(200, 200))
+        game.player.make_connections()
+        game.red_button.make_connections()
+    
+    def main_logic(self, delta : float):
+        super().main_logic(delta)
+    
+    def cleanup(self):
+        game.player.remove_connections()
+        game.red_button.remove_connections()
+
 class PausedGameState(GameState):
     def __init__(self, game_object : 'Game', previous : GameState):
         super().__init__(game_object)
@@ -100,8 +115,19 @@ def runtime_imports():
     import game.test_player
     from game.test_player import TestPlayer
 
+    global Player
+    import game.player
+    from game.player import Player
+
+    global RedButton
+    import game.red_button
+    from game.red_button import RedButton
+
+    game.player.runtime_imports()
+    game.red_button.runtime_imports()
 
 class GameStates:
     NormalGameState = NormalGameState
     TestGameState = TestGameState
     PausedGameState = PausedGameState
+    RedButtonStage = RedButtonStage
