@@ -1,5 +1,6 @@
 Theme: Nothing can go wrong
 Game link: https://mementojunior123.itch.io/game-jam-13
+Temporary acces link: https://mementojunior123.itch.io/game-jam-13?secret=WBLPDoytPAL6uOsW81BGMeExE (yes this being here is intentional)
 
 The plan:
 A mouse(or kbm) based bullet hell game where everything kicks off beacause you did something you shouldn't have.
