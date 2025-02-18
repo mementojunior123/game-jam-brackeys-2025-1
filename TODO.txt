@@ -6,12 +6,15 @@ A mouse(or kbm) based bullet hell game where everything kicks off beacause you d
 (Like pressing a big red button)
 Every "stage" is you doing something you shouldn't have.
 Example: You turn on a broken lawnmower and it starts charging and sending grass at you. New objective: Survive.
-The last stage is simple: All you have to do is *not* press the red button.
-If you don't press it after 30s, you get the good ending and win (easter egg).
-If you *do* press it, then you get an infinite(?) assault where you try to get a high score.
-
 
 *After all, what could possibly go wrong?*
+
+Stage 1: Red button (Introduction)
+Stage 2: Lawnmower (Might not be done/replaced due to lack of assets)
+Stage 3: Red switch "Patience"
+Extra stage: Infinite assault (Difficulty dosent stop going up)
+Extra stage 2: Computer virus
+
 -------------
 Priority list
 
@@ -21,16 +24,22 @@ Necessary : These are absolutely necessary for the game to work.
  (Is there a dodge ability? 
  Do we use a mouse or a keyboard?)
 -Figure out what exactly causes the stages to start
+-Stage 1
 
 High : These features will be prioritized during developpement. Ideally, all of them get finished.
 -Figure out the theming of each stage
 -Add a bit of music and sfx so the game dosent feel empty
 -Add *some* assets to the game
--The endgame
+-Funny dialouge
+-Stage 3
+-Endless assault
+
 
 Medium : These features will be added if there is spare time at the end of the jam. Some of them may be added.
 -Get proper assets
 -Get more diverse sound and music
+-Stage 2
+-Extra stage 2
 
 Low : These features will not be added in the game jam.
 -Implement settings
