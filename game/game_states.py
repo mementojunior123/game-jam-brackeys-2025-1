@@ -76,6 +76,8 @@ class RedButtonStage(NormalGameState):
         super().__init__(game_object)
         self.player : Player = Player.spawn(pygame.Vector2(480, 270))
         self.red_button : RedButton = RedButton.spawn(pygame.Vector2(200, 200))
+        projectile : StandardProjectile = StandardProjectile.spawn(pygame.Vector2(0,0), velocity=pygame.Vector2(10, 0).rotate(29.36), 
+                                                                   accel=pygame.Vector2(0.005, 0.00).rotate(29.36), kill_offscreen=True, drag=0.01)
         game.player.make_connections()
         game.red_button.make_connections()
     
@@ -123,8 +125,13 @@ def runtime_imports():
     import game.red_button
     from game.red_button import RedButton
 
+    global BaseProjectile, StandardProjectile
+    import game.projectiles
+    from game.projectiles import BaseProjectile, StandardProjectile
+
     game.player.runtime_imports()
     game.red_button.runtime_imports()
+    game.projectiles.runtime_imports()
 
 class GameStates:
     NormalGameState = NormalGameState

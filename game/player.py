@@ -10,6 +10,9 @@ from utils.helpers import load_alpha_to_colorkey
 import game.red_button
 from game.red_button import RedButton
 
+import game.projectiles
+from game.projectiles import BaseProjectile, StandardProjectile
+
 class Player(Sprite):
     active_elements : list['Player'] = []
     inactive_elements : list['Player'] = []
