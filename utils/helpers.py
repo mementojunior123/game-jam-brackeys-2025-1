@@ -166,3 +166,8 @@ def tuple_vec_average(l : list[tuple[float, float]]) -> float:
     x_sum /= count
     y_sum /= count
     return (x_sum, y_sum)
+
+def get_drag_per_frame(target_drag : float, time : float, fps : int = 60) -> float:
+    time_fps : float = time * fps
+    return 1 - ((1 - target_drag) ** (1/time_fps))
+    
