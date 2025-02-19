@@ -11,7 +11,7 @@ from utils.ui.base_ui_elements import BaseUiElements
 import utils.interpolation as interpolation
 from utils.my_timer import Timer
 from game.sprite import Sprite
-from utils.helpers import average, random_float
+from utils.helpers import average, random_float, get_drag_per_frame
 from utils.ui.brightness_overlay import BrightnessOverlay
 from utils.particle_effects import ParticleEffect
 
@@ -54,8 +54,9 @@ class NormalGameState(GameState):
         self.game.state = PausedGameState(self.game, self)
     
     def handle_key_event(self, event : pygame.Event):
-        if event.type == pygame.K_p:
-            self.pause()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_p:
+                self.pause()
 
 class TestGameState(NormalGameState):
     def __init__(self, game_object : 'Game'):
@@ -73,16 +74,52 @@ class TestGameState(NormalGameState):
 
 class RedButtonStage(NormalGameState):
     def __init__(self, game_object : 'Game'):
-        super().__init__(game_object)
+        self.game = game_object
+    
+    def main_logic(self, delta : float):
+        super().main_logic(delta)
+    
+    def cleanup(self):
+        super().cleanup()
+
+class RedButtonStageStandby(RedButtonStage):
+    def __init__(self, game_object : 'Game'):
+        self.game : Game = game_object
         self.player : Player = Player.spawn(pygame.Vector2(480, 270))
-        self.red_button : RedButton = RedButton.spawn(pygame.Vector2(200, 200))
-        projectile : StandardProjectile = StandardProjectile.spawn(pygame.Vector2(0,0), velocity=pygame.Vector2(10, 0).rotate(29.36), 
-                                                                   accel=pygame.Vector2(0.005, 0.00).rotate(29.36), kill_offscreen=True, drag=0.01)
+        self.red_button : RedButton = RedButton.spawn(pygame.Vector2(480, 270))
+        #StandardProjectile.spawn(pygame.Vector2(0,0), velocity=pygame.Vector2(10, 0).rotate(29.36), 
+                                #accel=pygame.Vector2(0.005, 0.00).rotate(29.36), kill_offscreen=True, drag=get_drag_per_frame(0.5, 5))
         game.player.make_connections()
         game.red_button.make_connections()
     
     def main_logic(self, delta : float):
         super().main_logic(delta)
+    
+    def cleanup(self):
+        game.player.remove_connections()
+        game.red_button.remove_connections()
+    
+    def handle_mouse_event(self, event : pygame.Event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if self.red_button.rect.collidepoint(*event.pos):
+                self.switch_to_assault()
+    
+    def switch_to_assault(self):
+        self.game.state = RedButtonStageAssault(self.game, self)
+
+class RedButtonStageAssault(RedButtonStage):
+    def __init__(self, game_object : 'Game', previous : RedButtonStageStandby):
+        self.game = game_object
+        self.player : Player = previous.player
+        self.red_button : RedButton = previous.red_button
+        self.red_button.jump()
+    
+    def main_logic(self, delta : float):
+        Sprite.update_all_sprites(delta)
+        Sprite.update_all_registered_classes(delta)
+    
+    def handle_mouse_event(self, event : pygame.Event):
+        pass
     
     def cleanup(self):
         game.player.remove_connections()
@@ -103,8 +140,9 @@ class PausedGameState(GameState):
         self.game.state = self.previous_state
 
     def handle_key_event(self, event : pygame.Event):
-        if event.type == pygame.K_p:
-            self.unpause()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_p:
+                self.unpause()
 
 def runtime_imports():
     global Game
@@ -138,3 +176,5 @@ class GameStates:
     TestGameState = TestGameState
     PausedGameState = PausedGameState
     RedButtonStage = RedButtonStage
+    RedButtonStageStandby = RedButtonStageStandby
+    RedButtonStageAssault = RedButtonStageAssault

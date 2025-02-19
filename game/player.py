@@ -115,25 +115,11 @@ def runtime_imports():
     pass
 
 def make_connections():
-    core_object.event_manager.bind(pygame.MOUSEBUTTONDOWN, Player.receive_event)
-    core_object.event_manager.bind(pygame.MOUSEBUTTONUP, Player.receive_event)
-    core_object.event_manager.bind(pygame.MOUSEMOTION, Player.receive_event)
-
-    core_object.event_manager.bind(pygame.KEYDOWN, Player.receive_event)
-    core_object.event_manager.bind(pygame.KEYUP, Player.receive_event)
-
-    core_object.event_manager.bind(pygame.FINGERUP, Player.receive_event)
-    core_object.event_manager.bind(pygame.FINGERDOWN, Player.receive_event)
-    core_object.event_manager.bind(pygame.FINGERMOTION, Player.receive_event)
+    for event_type in {pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP, pygame.MOUSEMOTION, pygame.KEYDOWN, pygame.KEYUP, 
+                       pygame.FINGERUP, pygame.FINGERDOWN, pygame.FINGERMOTION}:
+        core_object.event_manager.bind(event_type, Player.receive_event)
 
 def remove_connections():
-    core_object.event_manager.unbind(pygame.MOUSEBUTTONDOWN, Player.receive_event)
-    core_object.event_manager.unbind(pygame.MOUSEBUTTONUP, Player.receive_event)
-    core_object.event_manager.unbind(pygame.MOUSEMOTION, Player.receive_event)
-
-    core_object.event_manager.unbind(pygame.KEYDOWN, Player.receive_event)
-    core_object.event_manager.unbind(pygame.KEYUP, Player.receive_event)
-
-    core_object.event_manager.unbind(pygame.FINGERUP, Player.receive_event)
-    core_object.event_manager.unbind(pygame.FINGERDOWN, Player.receive_event)
-    core_object.event_manager.unbind(pygame.FINGERMOTION, Player.receive_event)
+    for event_type in {pygame.MOUSEBUTTONDOWN, pygame.MOUSEBUTTONUP, pygame.MOUSEMOTION, pygame.KEYDOWN, pygame.KEYUP, 
+                       pygame.FINGERUP, pygame.FINGERDOWN, pygame.FINGERMOTION}:
+        core_object.event_manager.unbind(event_type, Player.receive_event)

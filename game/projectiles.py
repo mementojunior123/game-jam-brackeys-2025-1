@@ -52,7 +52,7 @@ class BaseProjectile(Sprite):
         cls.unpool(element)
         return element
     
-    def update(self, delta : float):
+    def do_movement(self, delta : float):
         self.velocity *=  ((1 - self.drag) ** delta) ** 0.5
 
         self.velocity += self.acceleration * 0.5 * delta
@@ -61,6 +61,9 @@ class BaseProjectile(Sprite):
 
         self.velocity *=  ((1 - self.drag) ** delta) ** 0.5
         self.rect.center = self.position
+
+    def update(self, delta : float):
+        self.do_movement()
         if self.rect.colliderect(self.bounding_box):
             self.was_onscreen = True
     

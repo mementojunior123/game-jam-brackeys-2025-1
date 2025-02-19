@@ -41,7 +41,7 @@ class Game:
         if event.mode == 'test':
             self.state = self.STATES.TestGameState(self)
         elif event.mode == 'story':
-            self.state = self.STATES.RedButtonStage(self)
+            self.state = self.STATES.RedButtonStageStandby(self)
         else:
             self.state = self.STATES.TestGameState(self)
 
