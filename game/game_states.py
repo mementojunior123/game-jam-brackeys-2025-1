@@ -94,15 +94,19 @@ class RedButtonStageStandby(RedButtonStage):
     
     def main_logic(self, delta : float):
         super().main_logic(delta)
-    
+        if not self.red_button.rect.colliderect((0,0, *core_object.main_display.get_size())):
+            self.switch_to_assault()
+            self.red_button.kill_instance()
+
     def cleanup(self):
         game.player.remove_connections()
         game.red_button.remove_connections()
     
     def handle_mouse_event(self, event : pygame.Event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.red_button.rect.collidepoint(*event.pos):
-                self.switch_to_assault()
+            if self.red_button.rect.collidepoint(*event.pos) and (self.red_button.anchored):
+                self.red_button.jump()
+                print('hey')
     
     def switch_to_assault(self):
         self.game.state = RedButtonStageAssault(self.game, self)
@@ -111,12 +115,15 @@ class RedButtonStageAssault(RedButtonStage):
     def __init__(self, game_object : 'Game', previous : RedButtonStageStandby):
         self.game = game_object
         self.player : Player = previous.player
-        self.red_button : RedButton = previous.red_button
-        self.red_button.jump()
+        self.curr_pattern = Patterns.TestPattern()
+        self.curr_pattern.initialize(self.game.game_timer.get_time)
+        print('attacking')
     
     def main_logic(self, delta : float):
         Sprite.update_all_sprites(delta)
         Sprite.update_all_registered_classes(delta)
+        self.curr_pattern.process_frame()
+        if self.curr_pattern.is_over: self.game.fire_gameover_event()
     
     def handle_mouse_event(self, event : pygame.Event):
         pass
@@ -166,6 +173,11 @@ def runtime_imports():
     global BaseProjectile, StandardProjectile
     import game.projectiles
     from game.projectiles import BaseProjectile, StandardProjectile
+
+    global AttackPattern, Patterns
+    import game.attack_patterns
+    from game.attack_patterns import AttackPattern, Patterns
+    
 
     game.player.runtime_imports()
     game.red_button.runtime_imports()

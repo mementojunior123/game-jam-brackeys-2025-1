@@ -65,8 +65,10 @@ async def main():
         else:
             core.game.state.main_logic(core.dt)
             ParticleEffect.update_all()
+            
             window.fill((94,129,162))    
             Sprite.draw_all_sprites(window)
+
             core.main_ui.update()
             core.main_ui.render(window)
 

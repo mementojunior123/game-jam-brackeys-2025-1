@@ -63,7 +63,7 @@ class BaseProjectile(Sprite):
         self.rect.center = self.position
 
     def update(self, delta : float):
-        self.do_movement()
+        self.do_movement(delta)
         if self.rect.colliderect(self.bounding_box):
             self.was_onscreen = True
     

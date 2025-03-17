@@ -34,6 +34,7 @@ class RedButton(Sprite):
         element.pressed = False
         element.velocity = pygame.Vector2()
         element.accel = pygame.Vector2()
+        element.anchored = True
 
         cls.unpool(element)
         return element
@@ -49,9 +50,7 @@ class RedButton(Sprite):
                 self.unpress()
         if not self.anchored:
             self.do_movement(delta)
-        if not self.rect.colliderect(self.bounding_box):
-            self.kill_instance_safe()
-    
+            
     def press(self):
         self.pressed = True
         if self.image != self.pressed_image:
